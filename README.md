@@ -626,4 +626,4 @@ goes somewhere awkward, rather than discovering it after the fact.
 - No analytics dashboard for comparing `utm_campaign` performance yet — the data's being
   captured and is now visible per-lead on `/owner/leads`, just not aggregated/charted anywhere
 - Buy/sell matching compares piano type only — doesn't factor in budget, location, or condition;
-  reasonable to extend once you see how the simple version performs in practice**
+  reasonable to extend once you see how the simple version performs in practice

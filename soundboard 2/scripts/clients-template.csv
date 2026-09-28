@@ -1,3 +1,0 @@
-client_name,client_email,client_phone,client_address,client_zip,client_active,piano_make,piano_model,piano_serial,piano_type,room_location,last_service_date,service_interval_months,piano_notes
-Marguerite Voss,marguerite.voss@example.com,503-555-0142,Lake Oswego OR,97034,true,Steinway,Model B,487213,grand,Living Room,2026-02-14,6,Regulation holding well
-Dennis Okafor,d.okafor@example.com,503-555-0198,Silverton OR,97381,true,Yamaha,U1,5510982,upright,Basement,2025-11-02,6,Due for full regulation

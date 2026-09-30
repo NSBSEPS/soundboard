@@ -13,7 +13,12 @@
 
 * { box-sizing: border-box; }
 
-html, body { background: var(--bg); color: var(--text); }
+html, body {
+  background:
+    radial-gradient(circle at 50% 18%, rgba(184, 134, 11, 0.22), transparent 34%),
+    linear-gradient(145deg, #000000 0%, #0b0904 46%, #241b08 100%);
+  color: var(--text);
+}
 
 body {
   margin: 0;

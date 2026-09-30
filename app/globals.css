@@ -28,6 +28,14 @@ h1, h2, h3, h4 {
   color: var(--text);
 }
 h1 { border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+main > h1 {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 450;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  text-wrap: balance;
+}
 
 a { color: var(--accent-bright); text-decoration: none; }
 a:hover { text-decoration: underline; }

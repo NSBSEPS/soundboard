@@ -95,10 +95,10 @@ export function verifyUnsubscribeToken(clientId: string, token: string) {
 
 function emailShell(bodyHtml: string, unsubscribeUrl: string) {
   return `
-    <div style="font-family: Georgia, serif; max-width: 520px; margin: 0 auto; color: #241a12;">
+    <div style="font-family: Georgia, serif; max-width: 560px; margin: 0 auto; color: #1a1a1a; font-size: 18px; line-height: 1.6;">
       ${bodyHtml}
       <hr style="border: none; border-top: 1px solid #ddd; margin: 28px 0 14px;" />
-      <p style="font-size: 11px; color: #999; line-height: 1.5;">
+      <p style="font-size: 14px; color: #555555; line-height: 1.5;">
         ${BUSINESS_MAILING_ADDRESS}<br />
         <a href="${unsubscribeUrl}" style="color: #999;">Unsubscribe from service reminders</a>
       </p>
@@ -114,10 +114,10 @@ function emailShell(bodyHtml: string, unsubscribeUrl: string) {
 // transactional messages like "here's your invoice" anyway.
 function transactionalEmailShell(bodyHtml: string) {
   return `
-    <div style="font-family: Georgia, serif; max-width: 520px; margin: 0 auto; color: #241a12;">
+    <div style="font-family: Georgia, serif; max-width: 560px; margin: 0 auto; color: #1a1a1a; font-size: 18px; line-height: 1.6;">
       ${bodyHtml}
       <hr style="border: none; border-top: 1px solid #ddd; margin: 28px 0 14px;" />
-      <p style="font-size: 11px; color: #999; line-height: 1.5;">${BUSINESS_MAILING_ADDRESS}</p>
+      <p style="font-size: 14px; color: #555555; line-height: 1.5;">${BUSINESS_MAILING_ADDRESS}</p>
     </div>
   `;
 }
@@ -131,7 +131,7 @@ export function invoiceEmail(args: { clientName: string; total: number; paymentU
         <p>Hi ${firstName},</p>
         <p>Here's the invoice for your recent piano service. You can pay securely online —
         no need to mail anything or call in a card number.</p>
-        <p><a href="${args.paymentUrl}" style="background:#3d2b1c;color:#f2ead9;padding:10px 18px;text-decoration:none;display:inline-block;">Pay $${args.total.toFixed(2)}</a></p>
+        <p><a href="${args.paymentUrl}" style="background:#000000;color:#d4af37;font-weight:bold;padding:14px 24px;font-size:18px;text-decoration:none;display:inline-block;">Pay $${args.total.toFixed(2)}</a></p>
         <p>Thanks for keeping your piano in shape.</p>
       `
     ),
@@ -151,7 +151,7 @@ export function routineReminderEmail(args: { clientName: string; clientId: strin
         <p>Your piano is due for its regular tuning. Keeping to a consistent schedule is what
         keeps pitch stable and protects the instrument long-term — waiting past due tends to
         mean more drift to correct next time, not less work now.</p>
-        <p><a href="${args.portalUrl}" style="background:#3d2b1c;color:#f2ead9;padding:10px 18px;text-decoration:none;display:inline-block;">Schedule your tuning</a></p>
+        <p><a href="${args.portalUrl}" style="background:#000000;color:#d4af37;font-weight:bold;padding:14px 24px;font-size:18px;text-decoration:none;display:inline-block;">Schedule your tuning</a></p>
         <p>That link takes you straight to your piano's page where you can pick a time that
         works for you.</p>
       `,
@@ -187,7 +187,7 @@ export function dormantClientEmail(args: {
         long without attention doesn't just drift out of tune — the wood, felt, and metal parts
         respond to years of humidity swings and use, and small issues that were cheap to fix
         early can turn into bigger ones. The sooner it's looked at, the more options you have.</p>
-        <p><a href="${args.portalUrl}" style="background:#a24b3b;color:#fff;padding:10px 18px;text-decoration:none;display:inline-block;">Schedule now</a></p>
+        <p><a href="${args.portalUrl}" style="background:#d4af37;color:#000000;font-weight:bold;padding:14px 24px;font-size:18px;text-decoration:none;display:inline-block;">Schedule now</a></p>
         <p>One click gets you to your piano's page — pick whatever time works, no phone tag
         required. If it's simply gone unused, I'm happy to do a quick evaluation first and be
         straight with you about what it actually needs.</p>

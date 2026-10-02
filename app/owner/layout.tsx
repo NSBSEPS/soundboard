@@ -27,7 +27,7 @@ export default async function OwnerLayout({ children }: { children: React.ReactN
 
   return (
     <div>
-      <nav style={{ display: "flex", alignItems: "center", gap: 18, padding: "14px 24px", borderBottom: "2px solid #c8102e", fontSize: 14, flexWrap: "wrap" }}>
+      <nav style={{ display: "flex", alignItems: "center", gap: 18, padding: "14px 24px", borderBottom: "2px solid var(--accent)", fontSize: 14, flexWrap: "wrap" }}>
         <span style={{ fontFamily: "var(--font-fraunces), Georgia, serif", fontSize: 17, marginRight: 8 }}>
           Edens Piano Service
           <span style={{ display: "block", fontSize: 10.5, color: "#a3a3a3", fontStyle: "italic", letterSpacing: 0.3 }}>

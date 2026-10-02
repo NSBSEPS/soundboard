@@ -50,7 +50,7 @@ export default function QuickAdd({ clients }: { clients: { id: string; name: str
           onClick={() => setOpen(null)}
         >
           <div
-            style={{ background: "#0d0d0d", border: "1px solid #c8102e", padding: 22, width: 380, borderRadius: 4 }}
+            style={{ background: "#0d0d0d", border: "1px solid var(--accent)", padding: 22, width: 380, borderRadius: 4 }}
             onClick={(e: React.MouseEvent) => e.stopPropagation()}
           >
             {open === "client" ? (

@@ -60,23 +60,23 @@ export default function PianoTuningLandingPage() {
       <style>{`
         .landing { max-width: 760px; margin: 0 auto; padding: 32px 20px 60px; font-family: system-ui, sans-serif; line-height: 1.55; }
         .landing h1 { font-size: 30px; margin-bottom: 6px; }
-        .landing .sub { color: #c4c4c4; margin-bottom: 28px; }
+        .landing .sub { color: var(--muted); margin-bottom: 28px; }
         .landing h2 { font-size: 21px; margin-top: 38px; }
         .area-list { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; list-style: none; margin: 12px 0 0; }
-        .area-list li { background: #1a1a1a; padding: 5px 11px; font-size: 13.5px; border-radius: 3px; }
+        .area-list li { background: var(--panel-2); padding: 6px 12px; font-size: 16px; border-radius: 3px; }
         .faq-item { margin-bottom: 16px; }
         .faq-item strong { display: block; margin-bottom: 4px; }
         .lead-form { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
         .lead-form .field-row { display: flex; gap: 10px; }
         .lead-form input, .lead-form select, .lead-form textarea {
-          flex: 1; padding: 10px; border: 1px solid #3d3d3d; font-size: 14px; font-family: inherit;
+          flex: 1; padding: 12px; border: 1px solid var(--border-strong); font-size: 17px; font-family: inherit;
         }
         .lead-form button {
-          padding: 12px; background: #c8102e; color: #ffffff; border: none; font-weight: 600; cursor: pointer;
+          padding: 14px; background: var(--accent); color: var(--on-accent); border: none; font-weight: 700; font-size: 18px; cursor: pointer;
         }
         .lead-form button:disabled { opacity: 0.6; cursor: default; }
-        .lead-error { color: #e63950; font-size: 13.5px; }
-        .lead-confirm { background: #1a1a1a; padding: 16px; margin-top: 16px; }
+        .lead-error { color: var(--danger); font-size: 16px; }
+        .lead-confirm { background: var(--panel-2); border: 1px solid var(--accent); padding: 16px; margin-top: 16px; }
       `}</style>
 
       <h1>Piano Tuning &amp; Rebuilding Near {SERVICE_CENTER.city}</h1>

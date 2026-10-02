@@ -39,7 +39,7 @@ export default function LoginPage() {
         </p>
       ) : (
         <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-          <p style={{ color: "#b8b8b8", fontSize: 14 }}>
+          <p style={{ color: "var(--muted)", fontSize: 18 }}>
             Enter your email and we'll send you a link to access your piano's page — no password
             needed.
           </p>
@@ -49,10 +49,10 @@ export default function LoginPage() {
             placeholder="you@example.com"
             value={email}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
-            style={{ padding: 10, border: "1px solid #3d3d3d" }}
+            style={{ padding: 14, fontSize: 18 }}
           />
-          {error && <div style={{ color: "#e63950", fontSize: 13 }}>{error}</div>}
-          <button type="submit" disabled={busy} style={{ padding: 10, background: "#c8102e", color: "#ffffff", border: "none" }}>
+          {error && <div style={{ color: "var(--danger)", fontSize: 16 }}>{error}</div>}
+          <button type="submit" disabled={busy} style={{ padding: 14, fontSize: 18 }}>
             {busy ? "Sending…" : "Send sign-in link"}
           </button>
         </form>

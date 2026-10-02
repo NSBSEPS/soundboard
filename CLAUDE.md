@@ -94,13 +94,19 @@ Automated writers: cron (`reminder_sent`), `/api/unsubscribe`, `/api/webhooks/re
 `(resend_email_id, type)` makes webhook retries and repeat opens harmless. Any new kind of
 event: add it to the view and to `KIND_META`.
 
-## Visual theme — "Concert Grand"
+## Visual theme — "Concert Grand" (black & gold)
 
-Black `#000000` background, white text, single red accent `#c8102e` (`#e63950` for
-hover/active/errors). Tokens in `app/globals.css` (`--bg --panel --panel-2 --text --muted
---border --accent --accent-bright`). Fraunces (headings, `--font-fraunces`) + Inter (body).
-Use the CSS variables in new code rather than hard-coded hex. Public and internal pages share
-the theme.
+Black `#000000` ground with a soft gold glow at the top, warm-white text `#f7f2e7`, gold accent
+`#d4af37` (`#f0d060` hover/active/headings). Tokens in `app/globals.css` (`--bg --panel --panel-2
+--text --muted --border --border-strong --accent --accent-bright --on-accent --danger`). Fraunces
+(headings, `--font-fraunces`) + Inter (body). Use the CSS variables in new code, not hard-coded hex.
+Public and internal pages share the theme.
+
+**Legibility rules (many clients are elderly):** body text 18px; nothing client-facing below
+14px; text ON gold is `--on-accent` (black), never white; red (`--danger`) is for errors/overdue
+only, never decoration; form fields use `--border-strong`; keep the thick gold focus ring; links
+in running text stay underlined. Emails: light background, 18px text, black buttons with gold text
+(or gold with black text for the dormant-client email).
 
 ## Verification checklist — required before saying anything is done
 

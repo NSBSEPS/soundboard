@@ -33,7 +33,7 @@ export default async function ProspectsPage() {
   function Card({ p, isDue }: { p: any; isDue?: boolean }) {
     const contactBound = markContacted.bind(null, p.id);
     return (
-      <div style={{ ...box, borderColor: isDue ? "#c8102e" : "#3d3d3d" }}>
+      <div style={{ ...box, borderColor: isDue ? "var(--accent)" : "#3d3d3d" }}>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <strong>{p.name}</strong>
           <span style={{ fontSize: 11, textTransform: "uppercase", color: isDue ? "#e63950" : "#a3a3a3" }}>

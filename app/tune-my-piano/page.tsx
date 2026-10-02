@@ -33,19 +33,19 @@ export default function TuneMyPianoPage({
           font-family: system-ui, sans-serif; text-align: center;
         }
         .ad-landing h1 { font-size: 26px; margin-bottom: 8px; line-height: 1.25; }
-        .ad-landing .sub { color: #c4c4c4; margin-bottom: 24px; font-size: 15px; }
-        .ad-landing .trust { font-size: 13px; color: #a3a3a3; margin-top: 20px; }
+        .ad-landing .sub { color: var(--muted); margin-bottom: 24px; font-size: 18px; }
+        .ad-landing .trust { font-size: 15px; color: var(--muted); margin-top: 20px; }
         .lead-form { display: flex; flex-direction: column; gap: 10px; text-align: left; }
         .lead-form .field-row { display: flex; gap: 10px; }
         .lead-form input, .lead-form select, .lead-form textarea {
-          flex: 1; padding: 12px; border: 1px solid #3d3d3d; font-size: 15px; font-family: inherit;
+          flex: 1; padding: 14px; border: 1px solid var(--border-strong); font-size: 17px; font-family: inherit;
         }
         .lead-form button {
-          padding: 14px; background: #c8102e; color: #ffffff; border: none;
-          font-weight: 700; font-size: 16px; cursor: pointer; border-radius: 3px;
+          padding: 16px; background: var(--accent); color: var(--on-accent); border: none;
+          font-weight: 700; font-size: 18px; cursor: pointer; border-radius: 3px;
         }
-        .lead-confirm { background: #1a1a1a; padding: 16px; margin-top: 16px; border-radius: 3px; }
-        .lead-error { color: #e63950; font-size: 13.5px; }
+        .lead-confirm { background: var(--panel-2); border: 1px solid var(--accent); padding: 16px; margin-top: 16px; border-radius: 3px; }
+        .lead-error { color: var(--danger); font-size: 16px; }
       `}</style>
 
       <h1>Get Your Piano Tuned — Book in Under 2 Minutes</h1>

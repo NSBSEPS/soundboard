@@ -46,8 +46,8 @@ export default async function LeadsPage({
               padding: "6px 12px",
               fontSize: 13,
               textDecoration: "none",
-              color: activeStatus === s ? "#fff" : "#ffffff",
-              background: activeStatus === s ? "#c8102e" : "#262626",
+              color: activeStatus === s ? "var(--on-accent)" : "var(--text)",
+              background: activeStatus === s ? "var(--accent)" : "#262626",
             }}
           >
             {s} ({counts[s] ?? 0})

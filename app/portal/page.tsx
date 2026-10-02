@@ -55,7 +55,7 @@ export default async function PortalPage() {
         <div key={w.id} style={{ border: "1px solid #3d3d3d", padding: 12, marginBottom: 8 }}>
           <div>
             {w.description}{" "}
-            <span style={{ fontSize: 11, color: "#a3a3a3", textTransform: "uppercase" }}>
+            <span style={{ fontSize: 14, color: "var(--muted)", textTransform: "uppercase" }}>
               · {w.requires_scheduling ? (w.location_type === "in_shop" ? "shop visit" : "in-home visit") : "shop work"}
             </span>
           </div>
@@ -72,7 +72,7 @@ export default async function PortalPage() {
             <div>Confirmed: {new Date(w.scheduled_at).toLocaleString()}</div>
           )}
           {w.status === "in_progress" && (
-            <div style={{ color: "#e63950" }}>
+            <div style={{ color: "var(--danger)" }}>
               In progress{w.started_at && <> since {new Date(w.started_at).toLocaleDateString()}</>}
             </div>
           )}
@@ -91,13 +91,13 @@ export default async function PortalPage() {
             const total = (inv.invoice_line_items ?? []).reduce((sum: number, li: any) => sum + Number(li.amount), 0);
             return (
               <div key={inv.id} style={{ border: "1px solid #3d3d3d", padding: 12, marginBottom: 8 }}>
-                <div>${total.toFixed(2)} — <span style={{ textTransform: "uppercase", fontSize: 11 }}>{inv.status}</span></div>
+                <div>${total.toFixed(2)} — <span style={{ textTransform: "uppercase", fontSize: 14 }}>{inv.status}</span></div>
                 {inv.status === "sent" && inv.square_payment_link_url && (
                   <a href={inv.square_payment_link_url} target="_blank" rel="noreferrer">
                     <button style={{ marginTop: 6 }}>Pay now</button>
                   </a>
                 )}
-                {inv.status === "paid" && <div style={{ color: "#ffffff", fontSize: 13 }}>Paid — thank you!</div>}
+                {inv.status === "paid" && <div style={{ color: "var(--accent-bright)", fontSize: 16 }}>Paid — thank you!</div>}
               </div>
             );
           })}

@@ -1,0 +1,89 @@
+/* Edens Piano Service — "Concert Grand" theme (black & gold)
+   Black ground, warm-white text, gold accent. Fraunces (headings) + Inter (body).
+   Legibility first: many clients are older, so text is large, contrast is high
+   (gold on black is ~10:1, body text ~17:1) and focus states are unmistakable. */
+:root {
+  --bg: #000000;
+  --panel: #0e0c07;          /* black with a faint warm tint */
+  --panel-2: #1b170c;
+  --text: #f7f2e7;           /* warm white — softer glare than pure #fff */
+  --muted: #c2baa8;          /* ~10:1 on black */
+  --border: #3d3d3d;         /* dividers, cards */
+  --border-strong: #9a8440;  /* form fields & outlined buttons: >3:1 so they're easy to see */
+  --accent: #d4af37;         /* gold */
+  --accent-bright: #f0d060;  /* hover / active */
+  --on-accent: #000000;      /* text ON gold: white would only be ~2:1 */
+  --danger: #ff6b7d;         /* errors / overdue only, never decoration */
+}
+
+* { box-sizing: border-box; }
+
+html { background: var(--bg); }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+  /* soft gold glow rising from the top edge, then pure black */
+  background:
+    radial-gradient(ellipse 90% 45% at 50% -8%, rgba(212, 175, 55, 0.17), transparent 70%)
+      no-repeat,
+    var(--bg);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 18px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-weight: 500;
+  color: var(--accent-bright);
+  line-height: 1.25;
+}
+h1 { border-bottom: 2px solid var(--accent); padding-bottom: 6px; }
+
+a { color: var(--accent-bright); text-decoration: none; }
+a:hover { text-decoration: underline; }
+/* links inside running text stay underlined so they don't rely on color alone */
+p a, li a { text-decoration: underline; text-underline-offset: 3px; }
+
+hr { border: none; border-top: 1px solid var(--border); }
+code { background: var(--panel-2); padding: 1px 5px; border-radius: 2px; font-size: 0.92em; }
+
+input, select, textarea {
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--border-strong);
+  font-family: inherit;
+  font-size: 16px;           /* also stops iOS zooming the page on focus */
+  padding: 10px;
+  border-radius: 3px;
+}
+input::placeholder, textarea::placeholder { color: var(--muted); opacity: 0.8; }
+input[type="checkbox"] { accent-color: var(--accent); padding: 0; width: 18px; height: 18px; }
+option, optgroup { background: var(--panel); color: var(--text); }
+::-webkit-calendar-picker-indicator { filter: invert(1); }
+
+/* thick, high-contrast focus ring for keyboard and low-vision users */
+:focus-visible, input:focus, select:focus, textarea:focus {
+  outline: 3px solid var(--accent-bright);
+  outline-offset: 2px;
+}
+
+button {
+  background: var(--accent);
+  color: var(--on-accent);
+  border: 1px solid var(--accent);
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 10px 18px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+button:hover:not(:disabled) { background: var(--accent-bright); border-color: var(--accent-bright); }
+button:disabled { opacity: 0.55; cursor: default; }
+
+table { color: var(--text); }
+::selection { background: var(--accent); color: var(--on-accent); }

@@ -35,28 +35,6 @@ limiting on `/api/leads` beyond the honeypot (add a Vercel Firewall rate-limit r
 of owner actions; owner access = access to the owner's email inbox, so that email account must
 have 2-step verification.
 
-## Session handoff protocol (automatic — never ask the owner about it)
-
-Claude cannot see a token meter, so use these triggers instead. When ANY is true, finish the
-reply, then (without being asked) write a fresh `HANDOFF.md`, present it as a file, and end with
-one line: **"Handoff ready — start a new chat and paste it."**
-
-1. The owner says they're stopping, taking a break, or heading to bed/work.
-2. The chat has had roughly 15+ exchanges, or more than ~3 large attachments (zip, schema, long
-   logs, many screenshots), or Claude catches itself re-deriving earlier facts or feeling unsure
-   of earlier details.
-3. A milestone just finished (green build, domain connected, feature shipped) and the chat is
-   already long.
-4. About to start a large multi-file task in an already-long chat — hand off first, then build.
-
-Handoff contents (max ~1.5 pages, no code dumps): current state; what was done this session;
-next steps in order; pending owner decisions; open blockers; anything delivered but NOT confirmed
-applied; claims that are unverified; ground rules. State what is confirmed vs. assumed.
-
-Start of every new chat: read this file and the handoff, then ask the owner the 1-3 check
-questions the handoff lists before doing new work. When rules in this file change, tell the owner
-to re-upload CLAUDE.md to Project knowledge (Claude can't do that for them).
-
 ## Tech stack (actual, not aspirational)
 
 - **Next.js 14**, App Router, TypeScript (strict), Server Components + Server Actions

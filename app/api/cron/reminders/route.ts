@@ -156,13 +156,20 @@ export async function GET(request: Request) {
     const { data: linkData, error: linkError } = await supabase.auth.admin.generateLink({
       type: "magiclink",
       email: first.client_email,
-      options: { redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"}/auth/callback?redirect_to=/portal` },
     });
 
-    if (linkError || !linkData?.properties?.action_link) {
+    // Build our own link from the one-time hashed token instead of using
+    // Supabase's action_link: that link needs a browser-side PKCE secret that
+    // a server-generated link can never have, so it can't sign anyone in.
+    // /auth/confirm verifies the token server-side (and only after a human
+    // presses its button, so email scanners can't burn it).
+    const hashedToken = linkData?.properties?.hashed_token;
+    if (linkError || !hashedToken || !linkData?.user) {
       skipped.push({ clientId, reason: "couldn't generate sign-in link" });
       continue;
     }
+    const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(/\/+$/, "");
+    const signInUrl = `${siteUrl}/auth/confirm?token_hash=${encodeURIComponent(hashedToken)}&type=magiclink`;
 
     await supabase
       .from("clients")
@@ -180,12 +187,12 @@ export async function GET(request: Request) {
           clientName: first.client_name,
           clientId,
           lastServiceDate: oldest.last_service_date,
-          portalUrl: linkData.properties.action_link,
+          portalUrl: signInUrl,
         })
       : routineReminderEmail({
           clientName: first.client_name,
           clientId,
-          portalUrl: linkData.properties.action_link,
+          portalUrl: signInUrl,
         });
 
     try {

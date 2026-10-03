@@ -8,9 +8,32 @@ import { NextResponse } from "next/server";
 const supabase = createAdminClient();
 
 export async function POST(request: Request) {
-  const body = await request.json();
+  let body: any;
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ error: "Invalid request" }, { status: 400 });
+  }
+  if (!body || typeof body !== "object") {
+    return NextResponse.json({ error: "Invalid request" }, { status: 400 });
+  }
 
-  const { name, email, phone, zip, piano_type, service_needed, message, website, utm_source, utm_medium, utm_campaign, source } = body;
+  // Public, unauthenticated input: accept only strings, trim, and cap length so
+  // nobody can stuff the database or the owner's screen with junk.
+  const clip = (v: unknown, max: number): string | null =>
+    typeof v === "string" && v.trim() ? v.trim().slice(0, max) : null;
+  const name = clip(body.name, 120);
+  const email = clip(body.email, 200);
+  const phone = clip(body.phone, 40);
+  const zip = clip(body.zip, 10);
+  const piano_type = clip(body.piano_type, 30);
+  const service_needed = clip(body.service_needed, 30);
+  const message = clip(body.message, 3000);
+  const utm_source = clip(body.utm_source, 100);
+  const utm_medium = clip(body.utm_medium, 100);
+  const utm_campaign = clip(body.utm_campaign, 100);
+  const source = clip(body.source, 60);
+  const website = body.website;
 
   // Honeypot: a field named "website" that's hidden via CSS in the real form
   // (see lead-form.tsx) — real visitors never fill it in, bots that
@@ -20,8 +43,11 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true });
   }
 
-  if (!name || !zip) {
-    return NextResponse.json({ error: "Name and zip are required" }, { status: 400 });
+  if (!name || !zip || !/^\d{5}$/.test(zip)) {
+    return NextResponse.json({ error: "Name and a 5-digit zip are required" }, { status: 400 });
+  }
+  if (email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+    return NextResponse.json({ error: "That email address doesn't look right" }, { status: 400 });
   }
 
   const { error } = await supabase.from("leads").insert({
@@ -39,7 +65,9 @@ export async function POST(request: Request) {
   });
 
   if (error) {
-    return NextResponse.json({ error: error.message }, { status: 400 });
+    // Log the detail server-side; never send database internals to the public.
+    console.error("lead insert failed:", error.message);
+    return NextResponse.json({ error: "Could not save your request" }, { status: 400 });
   }
 
   // TODO: send yourself a notification email/SMS on new lead (Resend/Postmark/Twilio).

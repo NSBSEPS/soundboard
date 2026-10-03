@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type React from "react";
 import { createClient } from "@/lib/supabase-client";
 
@@ -10,6 +10,13 @@ export default function LoginPage() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
 
+  // Friendly message when a sign-in link was expired, used, or malformed.
+  useEffect(() => {
+    const e = new URLSearchParams(window.location.search).get("error");
+    if (e === "link_expired") setError("That sign-in link has expired or was already used. Enter your email to get a fresh one.");
+    else if (e === "link_invalid") setError("That sign-in link wasn't valid. Enter your email to get a fresh one.");
+  }, []);
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setBusy(true);
@@ -18,14 +25,24 @@ export default function LoginPage() {
     const supabase = createClient();
     const { error } = await supabase.auth.signInWithOtp({
       email,
-      options: { emailRedirectTo: `${window.location.origin}/auth/callback?redirect_to=/portal` },
+      // shouldCreateUser:false — strangers can't create accounts here. Clients
+      // get accounts from the reminder system or from the owner.
+      options: { shouldCreateUser: false, emailRedirectTo: `${window.location.origin}/auth/callback` },
     });
 
     setBusy(false);
-    if (error) {
-      setError("Something went wrong sending the link — try again in a moment.");
-    } else {
+    const code = String((error as any)?.code ?? "");
+    const status = (error as any)?.status;
+    if (!error) {
       setSent(true);
+    } else if (status === 429 || code.startsWith("over_")) {
+      setError("Too many sign-in emails were requested. Please wait a few minutes, then try again.");
+    } else if (status === 422 || code === "otp_disabled") {
+      // Unknown address. Show the same screen as success so this page can't be
+      // used to discover which emails are clients.
+      setSent(true);
+    } else {
+      setError("Something went wrong sending the link — try again in a moment.");
     }
   }
 

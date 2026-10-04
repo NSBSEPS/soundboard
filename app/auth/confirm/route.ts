@@ -69,9 +69,17 @@ export async function POST(request: Request) {
 
   // Reject cross-site form posts (login CSRF). Browsers always send these
   // headers on a real same-site button press.
+  // NOTE: this page sends Referrer-Policy: no-referrer, and browsers then send
+  // "Origin: null" on even a same-origin form POST. Comparing Origin to our own
+  // origin therefore rejected real sign-ins. Sec-Fetch-Site is the reliable
+  // signal (set by the browser, can't be forged by a web page); Origin is only
+  // checked as a fallback, and the literal "null" is not treated as cross-site.
   const origin = request.headers.get("origin");
   const fetchSite = request.headers.get("sec-fetch-site");
-  if ((origin && origin !== url.origin) || (fetchSite && fetchSite !== "same-origin")) {
+  const crossSite = fetchSite
+    ? fetchSite !== "same-origin"
+    : !!origin && origin !== "null" && origin !== url.origin;
+  if (crossSite) {
     return new Response("Forbidden", { status: 403 });
   }
 
